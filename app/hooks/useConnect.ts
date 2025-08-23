@@ -65,6 +65,15 @@ export const useConnect = () => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
+  const editTask = (
+    id: string,
+    updates: { text: string; completed: boolean }
+  ) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === id ? { ...task, ...updates } : task))
+    );
+  };
+
   const getTaskStats = () => {
     const total = tasks.length;
     const completed = tasks.filter((task) => task.completed).length;
@@ -74,9 +83,9 @@ export const useConnect = () => {
   return {
     tasks,
     addTask,
+    editTask,
     toggleTask,
     deleteTask,
     getTaskStats,
   };
 };
-
