@@ -25,7 +25,7 @@ export const api = {
     updates: { title?: string; completed?: boolean; color?: string }
   ) => {
     const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updates),
     });
