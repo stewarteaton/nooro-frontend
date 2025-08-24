@@ -28,7 +28,7 @@ export function Header({ currentView, setIsCreateEditFormOpen }: HeaderProps) {
 
       {/* Create Task Button - overlays the black section, bottom edge of black section goes through middle of button */}
       {currentView === ViewEnum.LIST && (
-        <div className="absolute w-full max-w-4xl mx-auto px-8 -bottom-5 left-1/2 transform -translate-x-1/2">
+        <div className="absolute w-full max-w-4xl mx-auto px-8 left-1/2 transform -translate-x-1/2 bottom-0 translate-y-1/2">
           <Button
             onClick={() => setIsCreateEditFormOpen(true)}
             variant="action"
