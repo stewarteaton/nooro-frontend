@@ -25,9 +25,8 @@ export default function Home() {
     setSelectedTask,
     setIsDeleteModalOpen,
     handleTaskSubmit,
+    isLoading,
   } = useConnect();
-
-
 
   return (
     <div className="min-h-screen  text-white">
@@ -38,7 +37,12 @@ export default function Home() {
 
       {/* Conditionally render MainContent or TaskFormView in the same space */}
       <div className="px-8 py-6 max-w-4xl mx-auto mt-14">
-        {currentView === "list" ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+            <span className="ml-3 text-lg">Loading...</span>
+          </div>
+        ) : currentView === "list" ? (
           <MainContent
             tasks={tasks}
             onEditTask={openEditView}

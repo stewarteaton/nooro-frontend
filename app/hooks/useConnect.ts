@@ -122,7 +122,6 @@ export const useConnect = () => {
 
   const isLoading =
     createTaskMutation.isPending ||
-    updateTaskMutation.isPending ||
     deleteTaskMutation.isPending ||
     isLoadingTasks;
 
