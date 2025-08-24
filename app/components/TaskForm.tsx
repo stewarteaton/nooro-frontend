@@ -27,7 +27,7 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
       setisCompleted(task.isCompleted);
       setSelectedColor(task.color);
     } else {
-      setSelectedColor(taskColors.get("blue") || "#3b82f6"); // Default to blue
+      setSelectedColor(taskColors.get("red") || "#ef4444"); // Default to blue
     }
   }, [task, taskColors]);
 
@@ -42,17 +42,19 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
     }
   };
 
+  const labelClass = "text-base font-medium text-[var(--accent-blue-light)]";
+  const inputContainerClass = "space-y-2 flex flex-col";
   return (
     <div className="flex flex-col gap-6">
       <ArrowLeft
-        className="w-5 h-5 text-white hover:cursor-pointer"
+        className="w-6 h-6 text-white hover:cursor-pointer"
         onClick={onCancel}
       />
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
+      <form onSubmit={handleSubmit} className="space-y-6 flex flex-col">
+        <div className={inputContainerClass}>
           <label
             htmlFor="task-text"
-            className="text-sm font-medium text-[var(--accent-blue-light)]"
+            className={labelClass}
           >
             Title
           </label>
@@ -63,23 +65,24 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
             placeholder="Ex. Brush your teeth"
             className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-500 focus:border-[var(--accent-blue-light)]"
             autoFocus
+            required
           />
         </div>
 
-        <div className="space-y-3">
-          <label className="text-sm font-medium text-[var(--accent-blue-light)]">
+        <div className={inputContainerClass}>
+          <label className={labelClass}>
             Color
           </label>
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex gap-2 sm:gap-3 flex-wrap">
             {[...taskColors.values()].map((color) => (
               <button
                 key={color}
                 type="button"
                 onClick={() => setSelectedColor(color)}
-                className={`w-8 h-8 rounded-full border-2 transition-all duration-200 hover:cursor-pointer hover:scale-110 ${
+                className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 hover:cursor-pointer hover:scale-110 ${
                   selectedColor === color
                     ? "border-white scale-110 shadow-lg"
-                    : "border-gray-600 hover:border-gray-400"
+                    : ""
                 }`}
                 style={{ backgroundColor: color }}
                 aria-label={`Select ${color} color`}
@@ -90,10 +93,10 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
 
         <Button
           type="submit"
-          disabled={!isValid}
+          // disabled={!isValid}
           variant="action"
           size="lg"
-          className="w-full py-5 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-6 mt-2 font-bold disabled:cursor-not-allowed"
         >
           <span className="flex items-center gap-2">
             {mode === "create" ? (
