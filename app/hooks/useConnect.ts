@@ -23,8 +23,6 @@ export const useConnect = () => {
     queryFn: api.getTasks,
   });
 
-  console.log("tasks", tasks);
-
   // Create task mutation
   const createTaskMutation = useMutation({
     mutationFn: api.createTask,
