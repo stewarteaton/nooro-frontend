@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Task, TaskUpdate } from "@/types";
 import { taskColors } from "@/lib/utils";
-import { ArrowLeft, CirclePlus } from "lucide-react";
+import { ArrowLeft, CheckIcon, CirclePlus } from "lucide-react";
 
 interface TaskFormProps {
   task?: Task | null;
@@ -76,7 +76,7 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
                 key={color}
                 type="button"
                 onClick={() => setSelectedColor(color)}
-                className={`w-8 h-8 rounded-full border-2 transition-all duration-200 hover:scale-110 ${
+                className={`w-8 h-8 rounded-full border-2 transition-all duration-200 hover:cursor-pointer hover:scale-110 ${
                   selectedColor === color
                     ? "border-white scale-110 shadow-lg"
                     : "border-gray-600 hover:border-gray-400"
@@ -91,16 +91,23 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
         <Button
           type="submit"
           disabled={!isValid}
-          className="w-full text-white py-4 bg-[var(--accent-blue-light)] hover:bg-[var(--accent-blue-light)]/80 disabled:opacity-50 disabled:cursor-not-allowed"
+          variant="action"
+          size="lg"
+          className="w-full py-5 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {mode === "create" ? (
-            <span className="flex items-center gap-2">
-              <p>Add Task</p>
-              <CirclePlus className="w-4 h-4" />
-            </span>
-          ) : (
-            "Save"
-          )}
+          <span className="flex items-center gap-2">
+            {mode === "create" ? (
+              <>
+                <p>Add Task</p>
+                <CirclePlus className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                <p>Save</p>
+                <CheckIcon className="w-5 h-4 font-bold" />
+              </>
+            )}
+          </span>
         </Button>
       </form>
     </div>

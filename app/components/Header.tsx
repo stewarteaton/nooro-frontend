@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { ArrowLeft, CirclePlus } from "lucide-react";
-import {ViewEnum} from "@/types/index";
+import { Button } from "@/components/ui/button";
+import { ViewEnum } from "@/types/index";
 
 interface HeaderProps {
   currentView: ViewEnum;
@@ -27,14 +28,16 @@ export function Header({ currentView, setIsCreateEditFormOpen }: HeaderProps) {
 
       {/* Create Task Button - overlays the black section, bottom edge of black section goes through middle of button */}
       {currentView === ViewEnum.LIST && (
-        <div className="absolute w-full max-w-4xl mx-auto px-8 -bottom-6 left-1/2 transform -translate-x-1/2">
-          <button
+        <div className="absolute w-full max-w-4xl mx-auto px-8 -bottom-5 left-1/2 transform -translate-x-1/2">
+          <Button
             onClick={() => setIsCreateEditFormOpen(true)}
-            className="flex w-full items-center justify-center gap-3 bg-[var(--accent-blue-dark)] hover:bg-[var(--accent-blue-dark)]/80 px-6 py-3 rounded-lg transition-colors shadow-lg text-center hover:cursor-pointer"
+            variant="action"
+            size="lg"
+            className="w-full"
           >
-            <span className="text-white font-medium">Create Task</span>
-            <CirclePlus className="w-5 h-5 text-white" />
-          </button>
+            <span className="font-bold">Create Task</span>
+            <CirclePlus className="w-5 h-5" />
+          </Button>
         </div>
       )}
     </div>
