@@ -3,6 +3,7 @@ import { Task, TaskUpdate, ViewEnum } from "@/types";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { api } from "../services/api";
+import { toast } from "sonner";
 
 export const useConnect = () => {
   const queryClient = useQueryClient();
@@ -30,9 +31,11 @@ export const useConnect = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       setCurrentView(ViewEnum.LIST);
+      toast.success("Task created successfully!");
     },
     onError: (error) => {
-      console.error("Error fetching tasks:", error);
+      console.error("Error creating task:", error);
+      toast.error(error.message || "Failed to create task");
     },
   });
 
@@ -44,6 +47,11 @@ export const useConnect = () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       setCurrentView(ViewEnum.LIST);
       setSelectedTask(null);
+      toast.success("Task updated successfully!");
+    },
+    onError: (error) => {
+      console.error("Error updating task:", error);
+      toast.error(error.message || "Failed to update task");
     },
   });
 
@@ -54,6 +62,11 @@ export const useConnect = () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       setIsDeleteModalOpen(false);
       setSelectedTask(null);
+      toast.success("Task deleted successfully!");
+    },
+    onError: (error) => {
+      console.error("Error deleting task:", error);
+      toast.error(error.message || "Failed to delete task");
     },
   });
 
