@@ -27,12 +27,12 @@ export const TaskCard = ({
           onToggleTask(task.id);
         }}
         className={`w-5 h-5 rounded flex items-center justify-center cursor-pointer transition-colors ${
-          task.completed
+          task.isCompleted
             ? "bg-[var(--accent-purple)] hover:bg-[var(--accent-purple)]/80"
             : "border-2 border-[var(--accent-blue-light)] hover:border-[var(--accent-blue-light)]/80"
         }`}
       >
-        {task.completed && <Check className="w-3 h-3 text-white" />}
+        {task.isCompleted && <Check className="w-3 h-3 text-white" />}
       </button>
       <div className="flex items-center gap-3 flex-1">
         <div
@@ -41,7 +41,7 @@ export const TaskCard = ({
         />
         <p
           className={`${
-            task.completed ? "text-gray-500 line-through" : "text-gray-300"
+            task.isCompleted ? "text-gray-500 line-through" : "text-gray-300"
           }`}
         >
           {task.title}

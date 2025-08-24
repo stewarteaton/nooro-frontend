@@ -7,13 +7,19 @@ export enum ViewEnum {
 export interface Task {
   id: string;
   title: string;
-  completed: boolean;
+  isCompleted: boolean;
   createdAt: Date;
   color: string;
 }
 
 export interface TaskData {
   text: string;
-  completed: boolean;
+  isCompleted: boolean;
+  color: string;
+}
+
+export interface TaskUpdate {
+  title: string;
+  isCompleted: boolean;
   color: string;
 }

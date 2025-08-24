@@ -18,7 +18,7 @@ export function MainContent({
   onDeleteTask,
 }: MainContentProps) {
   const total = tasks.length;
-  const completed = tasks.filter((task) => task.completed).length;
+  const completed = tasks.filter((task) => task.isCompleted).length;
 
   return (
     <>

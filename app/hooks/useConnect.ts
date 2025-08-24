@@ -1,5 +1,5 @@
 "use client";
-import { Task, ViewEnum } from "@/types";
+import { Task, TaskUpdate, ViewEnum } from "@/types";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { api } from "../services/api";
@@ -15,7 +15,7 @@ export const useConnect = () => {
   // Fetch tasks
   const {
     data: tasks = [],
-    isLoading,
+    isLoading: isLoadingTasks,
     error,
   } = useQuery({
     queryKey: ["tasks"],
@@ -38,7 +38,7 @@ export const useConnect = () => {
 
   // Update task mutation
   const updateTaskMutation = useMutation({
-    mutationFn: ({ id, updates }: { id: string; updates: any }) =>
+    mutationFn: ({ id, updates }: { id: string; updates: TaskUpdate }) =>
       api.updateTask(id, updates),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -57,12 +57,18 @@ export const useConnect = () => {
     },
   });
 
-
-
   const handleToggleTask = (id: string) => {
+    const task = tasks.find((t: Task) => t.id === id);
+    if (!task) {
+      return alert("Task not found");
+    }
     updateTaskMutation.mutate({
       id,
-      updates: { completed: !tasks.find((t: Task) => t.id === id)?.completed },
+      updates: {
+        isCompleted: !task.isCompleted,
+        title: task.title,
+        color: task.color,
+      },
     });
   };
 
@@ -95,26 +101,35 @@ export const useConnect = () => {
 
   const getTaskStats = () => {
     const total = tasks.length;
-    const completed = tasks.filter((task: Task) => task.completed).length;
+    const completed = tasks.filter((task: Task) => task.isCompleted).length;
     return { total, completed };
   };
 
   const handleTaskSubmit = (taskData: {
     title: string;
-    completed: boolean;
+    isCompleted: boolean;
     color: string;
   }) => {
     if (currentView === "create") {
-      createTaskMutation.mutate({ title: taskData.title, color: taskData.color });
+      createTaskMutation.mutate({
+        title: taskData.title,
+        color: taskData.color,
+      });
     } else if (currentView === "edit" && selectedTask) {
       updateTaskMutation.mutate({ id: selectedTask.id, updates: taskData });
     }
   };
 
+  const isLoading =
+    createTaskMutation.isPending ||
+    updateTaskMutation.isPending ||
+    deleteTaskMutation.isPending ||
+    isLoadingTasks;
+
   return {
     // Data
     tasks,
-    isLoading,
+    isLoadingTasks,
     error,
 
     // UI state
@@ -143,5 +158,6 @@ export const useConnect = () => {
     isCreating: createTaskMutation.isPending,
     isUpdating: updateTaskMutation.isPending,
     isDeleting: deleteTaskMutation.isPending,
+    isLoading,
   };
 };

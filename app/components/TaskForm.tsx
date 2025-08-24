@@ -4,31 +4,27 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Task } from "@/types";
+import { Task, TaskUpdate } from "@/types";
 import { taskColors } from "@/lib/utils";
 import { ArrowLeft, CirclePlus } from "lucide-react";
 
 interface TaskFormProps {
   task?: Task | null;
-  onSubmit: (taskData: {
-    title: string;
-    completed: boolean;
-    color: string;
-  }) => void;
+  onSubmit: (taskData: TaskUpdate) => void;
   onCancel: () => void;
   mode: "create" | "edit";
 }
 
 export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
   const [text, setText] = useState("");
-  const [completed, setCompleted] = useState(false);
+  const [isCompleted, setisCompleted] = useState(false);
   const [selectedColor, setSelectedColor] = useState("#3b82f6");
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     if (task) {
       setText(task.title);
-      setCompleted(task.completed);
+      setisCompleted(task.isCompleted);
       setSelectedColor(task.color);
     } else {
       setSelectedColor(taskColors.get("blue") || "#3b82f6"); // Default to blue
@@ -42,7 +38,7 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isValid) {
-      onSubmit({ title: text.trim(), completed, color: selectedColor });
+      onSubmit({ title: text.trim(), isCompleted, color: selectedColor });
     }
   };
 
