@@ -57,23 +57,7 @@ export const useConnect = () => {
     },
   });
 
-  // Task operations
-  const handleCreateTask = ({
-    text,
-    color,
-  }: {
-    text: string;
-    color: string;
-  }) => {
-    createTaskMutation.mutate({ text, color });
-  };
 
-  const handleEditTask = (
-    id: string,
-    updates: { text: string; completed: boolean; color: string }
-  ) => {
-    updateTaskMutation.mutate({ id, updates });
-  };
 
   const handleToggleTask = (id: string) => {
     updateTaskMutation.mutate({
@@ -116,16 +100,14 @@ export const useConnect = () => {
   };
 
   const handleTaskSubmit = (taskData: {
-    text: string;
+    title: string;
     completed: boolean;
     color: string;
   }) => {
     if (currentView === "create") {
-      handleCreateTask({ text: taskData.text, color: taskData.color });
+      createTaskMutation.mutate({ title: taskData.title, color: taskData.color });
     } else if (currentView === "edit" && selectedTask) {
-      handleEditTask(selectedTask.id, taskData);
-    } else {
-      alert("Problem submitting task");
+      updateTaskMutation.mutate({ id: selectedTask.id, updates: taskData });
     }
   };
 
@@ -141,20 +123,18 @@ export const useConnect = () => {
     isDeleteModalOpen,
 
     // Task operations
-    handleCreateTask,
-    handleEditTask,
+    handleTaskSubmit,
     handleToggleTask,
     handleDeleteTask,
-    handleTaskSubmit,
 
     // UI operations
-    setCurrentView,
-    setSelectedTask,
-    setIsDeleteModalOpen,
     openEditView,
     openDeleteModal,
     goBack,
     closeDeleteModal,
+    setCurrentView,
+    setSelectedTask,
+    setIsDeleteModalOpen,
 
     // Stats
     getTaskStats,

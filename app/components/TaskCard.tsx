@@ -44,7 +44,7 @@ export const TaskCard = ({
             task.completed ? "text-gray-500 line-through" : "text-gray-300"
           }`}
         >
-          {task.text}
+          {task.title}
         </p>
       </div>
       <div className="flex items-center gap-2">

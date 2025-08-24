@@ -6,7 +6,7 @@ export enum ViewEnum {
 
 export interface Task {
   id: string;
-  text: string;
+  title: string;
   completed: boolean;
   createdAt: Date;
   color: string;

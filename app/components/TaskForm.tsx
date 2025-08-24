@@ -11,7 +11,7 @@ import { ArrowLeft, CirclePlus } from "lucide-react";
 interface TaskFormProps {
   task?: Task | null;
   onSubmit: (taskData: {
-    text: string;
+    title: string;
     completed: boolean;
     color: string;
   }) => void;
@@ -27,7 +27,7 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
 
   useEffect(() => {
     if (task) {
-      setText(task.text);
+      setText(task.title);
       setCompleted(task.completed);
       setSelectedColor(task.color);
     } else {
@@ -42,7 +42,7 @@ export function TaskForm({ task, onSubmit, onCancel, mode }: TaskFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isValid) {
-      onSubmit({ text: text.trim(), completed, color: selectedColor });
+      onSubmit({ title: text.trim(), completed, color: selectedColor });
     }
   };
 

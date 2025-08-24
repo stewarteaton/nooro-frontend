@@ -12,8 +12,6 @@ import { useLogic } from "./hooks/useLogic";
 export default function Home() {
   const {
     tasks,
-    handleCreateTask,
-    handleEditTask,
     handleToggleTask,
     handleDeleteTask,
     getTaskStats,
@@ -68,7 +66,7 @@ export default function Home() {
         size="sm"
       >
         <DeleteConfirmation
-          taskText={selectedTask?.text || ""}
+          taskText={selectedTask?.title || ""}
           onConfirm={handleDeleteTask}
           onCancel={() => {
             setIsDeleteModalOpen(false);
