@@ -16,11 +16,6 @@ export function DeleteConfirmation({
 }: DeleteConfirmationProps) {
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3 text-amber-400">
-        <AlertTriangle className="w-5 h-5" />
-        <span className="font-medium">Delete Task</span>
-      </div>
-
       <p className="text-gray-300">
         Are you sure you want to delete this task? This action cannot be undone.
       </p>
