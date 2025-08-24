@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nooro Frontend
 
-## Getting Started
+A Next.js frontend application for the Nooro project.
 
-First, run the development server:
+## Prerequisites
+
+- Node.js (version 18 or higher)
+- npm or yarn
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a `.env.local` file in the root directory and add your backend API URL:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:4000
+```
+
+**Note:** Replace `http://localhost:4000` with your actual Express backend API URL.
+
+## Running the App
+
+### Development Mode
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will be available at `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `app/` - Next.js app directory with components and pages
+- `components/ui/` - Reusable UI components
+- `types/` - TypeScript type definitions
+- `lib/` - Utility functions
 
-## Deploy on Vercel
+## Technologies & Tools
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js 15.5.0** - React framework with App Router and Turbopack
+- **React 19.1.0** - Latest React version with modern features
+- **React Query (TanStack Query) 5.85.5** - Server state management and data fetching
+- **shadcn/ui** - Pre-built, accessible UI components built on Radix UI
+- **TypeScript 5** - Type-safe JavaScript development
+- **Tailwind CSS 4** - Latest version of utility-first CSS framework
+- **ESLint 9** - Latest version for code linting and quality enforcement
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Component Architecture
+
+The app follows a modular component structure:
+
+- **UI Components** (`components/ui/`) - Reusable, styled components like buttons, cards, and inputs
+- **Feature Components** (`app/components/`) - Business logic components specific to the application
+- **Custom Hooks** (`app/hooks/`) - Reusable logic for data fetching and state management
