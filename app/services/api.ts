@@ -16,7 +16,6 @@ export const api = {
   },
 
   createTask: async (task: { title: string; color: string }) => {
-    console.log("Creating task", { task });
     const response = await fetch(`${API_BASE_URL}/api/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
