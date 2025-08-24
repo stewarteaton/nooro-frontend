@@ -4,9 +4,14 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Colors From Figma */
   --accent-blue-dark: #1e6f9f;
   --accent-blue-light: #4ea8de;
   --accent-purple: #8284fa;
+  --gray-secondary: #262626;
+  /* End Colors From Figma */
+
+  /* Styles from Shadcn UI */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -39,6 +44,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  /* End Styles from Shadcn UI */
 }
 
 @theme inline {
