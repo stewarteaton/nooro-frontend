@@ -7,7 +7,6 @@ import { MainContent } from "./components/MainContent";
 import { TaskForm } from "./components/TaskForm";
 import { DeleteConfirmation } from "./components/DeleteConfirmation";
 import { ViewEnum, Task } from "@/types/index";
-import { useLogic } from "./hooks/useLogic";
 
 export default function Home() {
   const {
