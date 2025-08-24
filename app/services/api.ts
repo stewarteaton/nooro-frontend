@@ -6,7 +6,14 @@ export const api = {
     console.log("Fetching tasks");
     const response = await fetch(`${API_BASE_URL}/api/tasks`);
     if (!response.ok) throw new Error("Failed to fetch tasks");
-    return response.json();
+    const result = await response.json();
+
+    // Handle backend success flag
+    if (result.success === false) {
+      throw new Error(result.message || "Backend operation failed");
+    }
+
+    return result.data || [];
   },
 
   createTask: async (task: { title: string; color: string }) => {
@@ -17,7 +24,13 @@ export const api = {
       body: JSON.stringify(task),
     });
     if (!response.ok) throw new Error("Failed to create task");
-    return response.json();
+    const result = await response.json();
+
+    if (result.success === false) {
+      throw new Error(result.message || "Failed to create task");
+    }
+
+    return result.data || result;
   },
 
   updateTask: async (
