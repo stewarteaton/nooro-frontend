@@ -10,28 +10,26 @@ import { ViewEnum, Task } from "@/types/index";
 import { useLogic } from "./hooks/useLogic";
 
 export default function Home() {
-  const { tasks, addTask, editTask, toggleTask, deleteTask, getTaskStats } =
-    useConnect();
-
   const {
-    setCurrentView,
-    setIsDeleteModalOpen,
-    setSelectedTask,
+    tasks,
+    handleCreateTask,
+    handleEditTask,
+    handleToggleTask,
+    handleDeleteTask,
+    getTaskStats,
     currentView,
     selectedTask,
     isDeleteModalOpen,
-    handleCreateTask,
-    handleEditTask,
-    handleDeleteTask,
     openEditView,
     openDeleteModal,
     goBack,
-  } = useLogic({
-    addTask,
-    editTask,
-    toggleTask,
-    deleteTask,
-  });
+    setCurrentView,
+    setSelectedTask,
+    setIsDeleteModalOpen,
+    handleTaskSubmit,
+  } = useConnect();
+
+
 
   return (
     <div className="min-h-screen  text-white">
@@ -45,18 +43,15 @@ export default function Home() {
         {currentView === "list" ? (
           <MainContent
             tasks={tasks}
-            onCreateTask={() => setCurrentView(ViewEnum.CREATE)}
             onEditTask={openEditView}
-            onToggleTask={toggleTask}
+            onToggleTask={handleToggleTask}
             onDeleteTask={openDeleteModal}
           />
         ) : (
           <TaskForm
             task={currentView === "edit" ? selectedTask : null}
             mode={currentView}
-            onSubmit={
-              currentView === "create" ? handleCreateTask : handleEditTask
-            }
+            onSubmit={handleTaskSubmit}
             onCancel={goBack}
           />
         )}

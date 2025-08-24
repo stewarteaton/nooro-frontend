@@ -6,7 +6,6 @@ import { Task } from "@/types";
 
 interface MainContentProps {
   tasks: Task[];
-  onCreateTask: () => void;
   onEditTask: (task: Task) => void;
   onToggleTask: (id: string) => void;
   onDeleteTask: (task: Task) => void;
@@ -14,7 +13,6 @@ interface MainContentProps {
 
 export function MainContent({
   tasks,
-  onCreateTask,
   onEditTask,
   onToggleTask,
   onDeleteTask,

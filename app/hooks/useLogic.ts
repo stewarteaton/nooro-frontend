@@ -2,12 +2,12 @@ import { Task, TaskData, ViewEnum } from "@/types";
 import React, { useState } from "react";
 
 export const useLogic = ({
-  addTask,
+  createTask,
   editTask,
   toggleTask,
   deleteTask,
 }: {
-  addTask: (text: string, color: string) => void;
+  createTask: ({ text, color }: { text: string; color: string }) => void;
   editTask: (
     id: string,
     updates: { text: string; completed: boolean; color: string }
@@ -20,7 +20,7 @@ export const useLogic = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleCreateTask = (taskData: TaskData) => {
-    addTask(taskData.text, taskData.color);
+    createTask({ text: taskData.text, color: taskData.color });
     setCurrentView(ViewEnum.LIST);
   };
 
