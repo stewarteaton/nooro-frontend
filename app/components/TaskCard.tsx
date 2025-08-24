@@ -26,7 +26,7 @@ export const TaskCard = ({
           e.stopPropagation(); // Prevents the card click from firing
           onToggleTask(task.id);
         }}
-        className={`w-5 h-5 rounded flex items-center justify-center cursor-pointer transition-colors ${
+        className={`w-5 h-5 rounded-full flex items-center justify-center cursor-pointer transition-colors ${
           task.isCompleted
             ? "bg-[var(--accent-purple)] hover:bg-[var(--accent-purple)]/80"
             : "border-2 border-[var(--accent-blue-light)] hover:border-[var(--accent-blue-light)]/80"
